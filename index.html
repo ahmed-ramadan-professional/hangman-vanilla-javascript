@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <title>Hangman</title>
+    </head>
+    <body>
+        <audio
+            loop
+            id="audio"
+            src="resources/audio/Christoffer Moe Ditlevsen - True Grit (Royalty Free Music).m4a"
+            preload="auto"></audio>
+        <div class="root">
+            <div class="game">
+                <div id="loading" class="container active">
+                    <div class="loading">
+                        <h3>Loading...</h3>
+                        <div class="progressBarContainer">
+                            <div class="progressBar"><span>0%</span></div>
+                        </div>
+                        <h2 onclick="enterGame()" class="hidden">Enter Game</h2>
+                    </div>
+                </div>
+
+                <div id="main-menu" class="container">
+                    <div class="game-name">
+                        <h1>Hangman</h1>
+                        <h1>Game</h1>
+                    </div>
+                    <h3 class="score">Score : 0</h3>
+                    <div class="main-menu">
+                        <h2 onclick="mainMenuStart()">Start</h2>
+                        <h3 onclick="mainMenuCategorySettings()">
+                            Change category settings
+                        </h3>
+                        <h3 onclick="clearScoreCancel()">Clear score</h3>
+                        <h3 onclick="creditGoBack()">Credit</h3>
+                    </div>
+                </div>
+                <div id="category-select" class="container">
+                    <div class="game-name">
+                        <h1>Hangman</h1>
+                        <h1>Game</h1>
+                    </div>
+                    <div class="category-select">
+                        <h2>Select Categories</h2>
+                        <div class="categories">
+                            <label class="category">
+                                <input
+                                    id="category-animals"
+                                    type="checkbox"
+                                    value="animals" />
+                                <span></span>
+                                Animals
+                            </label>
+                            <label class="category">
+                                <input
+                                    id="category-food"
+                                    type="checkbox"
+                                    value="food" />
+                                <span></span>
+                                Food
+                            </label>
+                            <label class="category">
+                                <input
+                                    id="category-clothes"
+                                    type="checkbox"
+                                    value="clothes" />
+                                <span></span>
+                                Clothes
+                            </label>
+                            <label class="category">
+                                <input
+                                    id="category-jobs"
+                                    type="checkbox"
+                                    value="jobs" />
+                                <span></span>
+                                Jobs
+                            </label>
+                            <label class="category">
+                                <input
+                                    id="category-sports"
+                                    type="checkbox"
+                                    value="sports" />
+                                <span></span>
+                                Sports
+                            </label>
+                        </div>
+                        <div class="category-actions">
+                            <h3 onclick="categorySelectSave()">Save</h3>
+                            <h3 onclick="categorySelectCancel()">Cancel</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="in-progress" class="container">
+                    <div class="props">
+                        <div class="hangman mb-12px">
+                            <img
+                                class="mt-2px display-none"
+                                src="resources/props/rope.png" />
+                            <img
+                                class="mt-1px display-none"
+                                src="resources/props/head.png" />
+                            <img
+                                class="display-none clip-reveal"
+                                src="resources/props/body.png" />
+                            <img
+                                class="mb-1px display-none"
+                                src="resources/props/left_arm.png" />
+                            <img
+                                class="mb-1px display-none"
+                                src="resources/props/right_arm.png" />
+                            <img
+                                class="mb-1px display-none"
+                                src="resources/props/left_leg.png" />
+                            <img
+                                class="mb-1px display-none"
+                                src="resources/props/right_leg.png" />
+                        </div>
+                        <img
+                            class="ml-1px rock display-none"
+                            src="resources/props/platform.png" />
+                    </div>
+                    <div class="status">
+                        <h1 class="hidden">Game Over</h1>
+                        <div class="word">
+                            <h1>word</h1>
+                            <h2>category</h2>
+                        </div>
+                        <div class="in-progress-actions hidden">
+                            <button onclick="reveal()" class="display-none">
+                                Reveal
+                            </button>
+                            <button onclick="resetGame()">Continue</button>
+                        </div>
+                    </div>
+                    <h3 class="score">Score : 0</h3>
+                    <div class="keyboard">
+                        <div>
+                            <button>A</button>
+                            <button>B</button>
+                            <button>C</button>
+                            <button>D</button>
+                            <button>E</button>
+                        </div>
+                        <div>
+                            <button>F</button>
+                            <button>G</button>
+                            <button>H</button>
+                            <button>I</button>
+                            <button>J</button>
+                            <button>K</button>
+                        </div>
+                        <div>
+                            <button>L</button>
+                            <button>M</button>
+                            <button>N</button>
+                            <button>O</button>
+                            <button>P</button>
+                            <button>Q</button>
+                            <button>R</button>
+                        </div>
+                        <div>
+                            <button>S</button>
+                            <button>T</button>
+                            <button>U</button>
+                            <button>V</button>
+                            <button>W</button>
+                            <button>X</button>
+                            <button>Y</button>
+                            <button>Z</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="clear-score" class="container">
+                    <div class="game-name">
+                        <h1>Hangman</h1>
+                        <h1>Game</h1>
+                    </div>
+                    <div class="clear-score-confirmation">
+                        <h2>Clear Score</h2>
+                        <h3>Are you sure you want to reset score ?</h3>
+                        <div class="clear-score-actions">
+                            <h3 onclick="clearScoreReset()">Reset</h3>
+                            <h3 onclick="clearScoreCancel()">Cancel</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="credit" class="container">
+                    <div class="game-name">
+                        <h1>Hangman</h1>
+                        <h1>Game</h1>
+                    </div>
+                    <div class="credit">
+                        <h2>Credit</h2>
+                        <h3>Ahmed Ramadan</h3>
+                        <div class="links">
+                            <a
+                                href="https://www.linkedin.com/in/ahmed-ramadan-professional/"
+                                class="link"
+                                target="_blank"
+                                >LinkedIn</a
+                            >
+                            <a
+                                href="https://github.com/ahmed-ramadan-professional"
+                                class="link"
+                                target="_blank"
+                                >Github</a
+                            >
+                            <a
+                                href="mailto:ahmedramadanproessional@gmail.com"
+                                class="link"
+                                target="_blank"
+                                >Email</a
+                            >
+                            <a
+                                href="https://github.com/ahmed-ramadan-professional/hangman-vanilla-javascript.git"
+                                class="link"
+                                target="_blank"
+                                >This Repo Link</a
+                            >
+                        </div>
+                        <div class="credit-actions">
+                            <h3 onclick="creditGoBack()">Go Back</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="exit" class="exit">
+                    <span onclick="resetGame()"></span>
+                </div>
+                <div id="audio-control" class="audio-control">
+                    <span
+                        onclick="toggleAudio()"
+                        class="audio audio-normal"></span>
+                    <span
+                        onclick="toggleAudio()"
+                        class="audio audio-muted display-none"></span>
+                </div>
+                <div id="watermark" class="watermark">
+                    <h3>Ahmed Ramadan</h3>
+                </div>
+                <script src="utils/word_list.js"></script>
+                <script src="index.js"></script>
+            </div>
+        </div>
+    </body>
+</html>
