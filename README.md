@@ -1,4 +1,4 @@
-# Hangman Game — Vanilla JavaScript Implementation
+# Hangman Game - Vanilla JavaScript Implementation
 
 A fully interactive Hangman game built using **pure JavaScript, HTML, and CSS**, without frameworks or external libraries.
 
